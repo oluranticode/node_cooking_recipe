@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || process.env.PORT_NUMBER;
 const connectDB = require('./server/models/database');
 
 app.use(express.urlencoded( { extended: true } ));
@@ -16,7 +16,7 @@ app.use(expressLayouts);
 
 app.use(cookieParser('CookingBlogSecure'));
 app.use(session({
-  secret: 'CookingBlogSecretSession',
+  secret: process.env.SESSION_SECRET,
   saveUninitialized: true,
   resave: true
 }));
